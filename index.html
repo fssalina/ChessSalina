@@ -29,27 +29,16 @@ max-width:1400px;
 margin:auto;
 }
 
-/* NAVBAR */
-
 .navbar{
 margin-top:20px;
-
 background:rgba(255,255,255,.8);
-
 border:1px solid rgba(212,160,23,.15);
-
 border-radius:28px;
-
 padding:25px 45px;
-
 display:flex;
 justify-content:space-between;
 align-items:center;
-
-backdrop-filter:blur(20px);
-
-box-shadow:
-0 5px 30px rgba(0,0,0,.04);
+box-shadow:0 5px 30px rgba(0,0,0,.04);
 }
 
 .logo{
@@ -89,13 +78,10 @@ transition:.3s;
 color:#D4A017;
 }
 
-/* HERO */
-
 .hero{
 display:grid;
 grid-template-columns:1fr 1fr;
 align-items:center;
-
 padding:80px 0;
 }
 
@@ -111,102 +97,56 @@ color:#D4A017;
 
 .hero p{
 margin-top:25px;
-
 font-size:28px;
-
 line-height:1.7;
-
 color:#666;
-
 max-width:650px;
 }
 
 .btn{
-
 display:inline-block;
-
 margin-top:35px;
-
 padding:18px 42px;
-
 border-radius:18px;
-
 text-decoration:none;
-
 font-weight:600;
-
 font-size:20px;
-
 color:white;
-
-background:
-linear-gradient(
-135deg,
-#FFD76A,
-#D4A017
-);
-
-box-shadow:
-0 10px 30px rgba(212,160,23,.25);
+background:linear-gradient(135deg,#FFD76A,#D4A017);
+box-shadow:0 10px 30px rgba(212,160,23,.25);
 }
 
 .hero-image{
-
 display:flex;
 justify-content:center;
 align-items:center;
 }
 
 .king{
-
 font-size:350px;
-
-background:
-linear-gradient(
-180deg,
-#fff,
-#FFD76A
-);
-
+background:linear-gradient(180deg,#fff,#FFD76A);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-
-filter:
-drop-shadow(
-0 0 25px rgba(212,160,23,.2)
-);
+filter:drop-shadow(0 0 25px rgba(212,160,23,.2));
 }
 
-/* CARDS */
-
 .features{
-
 display:grid;
 grid-template-columns:repeat(3,1fr);
-
 gap:25px;
-
 margin-top:20px;
 }
 
 .card{
-
 background:white;
-
 border-radius:28px;
-
 padding:35px;
-
 border:1px solid rgba(212,160,23,.12);
-
-box-shadow:
-0 5px 20px rgba(0,0,0,.03);
-
+box-shadow:0 5px 20px rgba(0,0,0,.03);
 transition:.3s;
 }
 
 .card:hover{
-
 transform:translateY(-6px);
 }
 
@@ -221,32 +161,21 @@ margin-bottom:15px;
 }
 
 .card p{
-
 color:#666;
 line-height:1.8;
 font-size:18px;
 }
 
-/* STATS */
-
 .stats{
-
 margin-top:35px;
 margin-bottom:50px;
-
 background:white;
-
 border-radius:28px;
-
 padding:35px;
-
 display:flex;
 justify-content:space-around;
-
 border:1px solid rgba(212,160,23,.12);
-
-box-shadow:
-0 5px 20px rgba(0,0,0,.03);
+box-shadow:0 5px 20px rgba(0,0,0,.03);
 }
 
 .stat{
@@ -255,7 +184,6 @@ text-align:center;
 
 .stat h3{
 font-size:48px;
-color:#D4A017;
 }
 
 .stat p{
@@ -296,6 +224,7 @@ gap:30px;
 .menu{
 display:none;
 }
+
 }
 
 </style>
@@ -309,17 +238,14 @@ display:none;
 
 <div class="logo">
 <div class="logo-icon">♔</div>
-
-<div class="logo-text">
-Chess<span>Salina</span>
-</div>
+<div class="logo-text">Chess<span>Salina</span></div>
 </div>
 
 <div class="menu">
-<a href="#">Home</a>
-<a href="#">Openings</a>
-<a href="#">Tactics</a>
-<a href="#">Analysis</a>
+<a href="index.html">Home</a>
+<a href="openings.html">Openings</a>
+<a href="tactics.html">Tactics</a>
+<a href="analysis.html">Analysis</a>
 </div>
 
 </nav>
@@ -341,7 +267,7 @@ interactive openings, tactical puzzles
 and powerful analysis tools.
 </p>
 
-<a href="#" class="btn">
+<a href="openings.html" class="btn">
 Start Training →
 </a>
 
@@ -356,45 +282,33 @@ Start Training →
 <section class="features">
 
 <div class="card">
-
 <div class="icon">📖</div>
-
 <h2>Openings</h2>
-
 <p>
 Learn and train opening repertoires
 with interactive lines, ideas and
 spaced repetition.
 </p>
-
 </div>
 
 <div class="card">
-
 <div class="icon">🎯</div>
-
 <h2>Tactics</h2>
-
 <p>
 Solve tactical puzzles, improve
 pattern recognition and sharpen
 your tactical vision.
 </p>
-
 </div>
 
 <div class="card">
-
 <div class="icon">🔍</div>
-
 <h2>Analysis</h2>
-
 <p>
 Analyze your games, identify mistakes,
 discover stronger plans and improve
 your decision making.
 </p>
-
 </div>
 
 </section>
@@ -402,18 +316,18 @@ your decision making.
 <section class="stats">
 
 <div class="stat">
-<h3>25k+</h3>
-<p>Active Players</p>
+<h3>📖</h3>
+<p>Opening Training</p>
 </div>
 
 <div class="stat">
-<h3>15k+</h3>
-<p>Puzzles Solved Daily</p>
+<h3>🎯</h3>
+<p>Tactical Practice</p>
 </div>
 
 <div class="stat">
-<h3>500+</h3>
-<p>Openings Available</p>
+<h3>🔍</h3>
+<p>Game Analysis</p>
 </div>
 
 </section>
