@@ -13,7 +13,7 @@ href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.mi
 
 <style>
 
-/* ===== SEU LAYOUT ORIGINAL (NÃO MEXIDO) ===== */
+/* ===== LAYOUT ORIGINAL ===== */
 
 *{
 margin:0;
@@ -118,31 +118,31 @@ height:500px;
 
 /* ===== MELHORIAS ===== */
 
-.highlight-square {
-  position: relative;
+.highlight-square{
+position:relative;
 }
 
-.highlight-square::after {
-  content: "";
-  position: absolute;
-  width: 18%;
-  height: 18%;
-  border-radius: 50%;
-  background: rgba(212,160,23,.75);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  animation: fadeIn .12s ease-out;
+.highlight-square::after{
+content:"";
+position:absolute;
+width:18%;
+height:18%;
+border-radius:50%;
+background:rgba(212,160,23,.75);
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+pointer-events:none;
+animation:fadeIn .12s ease-out;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
-  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+@keyframes fadeIn{
+from{opacity:0;transform:translate(-50%,-50%) scale(0.6);}
+to{opacity:1;transform:translate(-50%,-50%) scale(1);}
 }
 
-#board.check {
-  box-shadow: 0 0 25px rgba(255,0,0,.35);
+#board.check{
+box-shadow:0 0 25px rgba(255,0,0,.35);
 }
 
 </style>
@@ -190,7 +190,6 @@ height:500px;
 
 <script>
 
-/* ===== CHESS ENGINE ===== */
 var game = new Chess();
 
 /* ===== SONS ===== */
@@ -206,71 +205,67 @@ function play(s){
   sounds[s].play();
 }
 
-/* ===== HIGHLIGHTS ===== */
-function removeHighlights() {
+/* ===== MOVES ===== */
+function removeHighlights(){
   document.querySelectorAll('.square-55d63')
     .forEach(el => el.classList.remove('highlight-square'));
 }
 
-function showMoves(square) {
+function showMoves(square){
   removeHighlights();
 
-  var moves = game.moves({ square: square, verbose: true });
+  var moves = game.moves({square:square, verbose:true});
 
-  moves.forEach(function (m) {
-    var el = document.querySelector('[data-square="' + m.to + '"]');
-    if (el) el.classList.add('highlight-square');
+  moves.forEach(m=>{
+    var el = document.querySelector('[data-square="'+m.to+'"]');
+    if(el) el.classList.add('highlight-square');
   });
 }
 
 /* ===== BOARD ===== */
 var board = Chessboard('board', {
 
-  position: 'start',
-  draggable: true,
+  position:'start',
+  draggable:true,
 
-  pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
+  pieceTheme:'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
 
-  onDragStart: function (source, piece) {
+  onDragStart:function(source,piece){
 
-    if (game.game_over()) return false;
+    if(game.game_over()) return false;
 
-    if ((game.turn() === 'w' && piece[0] === 'b') ||
-        (game.turn() === 'b' && piece[0] === 'w')) {
-      return false;
-    }
+    if((game.turn()==='w' && piece[0]==='b') ||
+       (game.turn()==='b' && piece[0]==='w')) return false;
 
     showMoves(source);
   },
 
-  onDrop: function (source, target) {
+  onDrop:function(source,target){
 
     var move = game.move({
-      from: source,
-      to: target,
-      promotion: 'q'
+      from:source,
+      to:target,
+      promotion:'q'
     });
 
     removeHighlights();
 
-    if (move === null) {
+    if(move===null){
       play("illegal");
       return "snapback";
     }
 
-    if (move.captured) play("capture");
+    if(move.captured) play("capture");
     else play("move");
 
-    if (game.in_check()) {
-      document.getElementById('board').classList.add('check');
-      setTimeout(() => play("check"), 100);
+    if(game.in_check()){
+      document.getElementById("board").classList.add("check");
+      setTimeout(()=>play("check"),100);
     } else {
-      document.getElementById('board').classList.remove('check');
+      document.getElementById("board").classList.remove("check");
     }
 
-    setTimeout(function () {
-      board.position(game.fen(), true);
-    }, 120);
+    setTimeout(()=>board.position(game.fen(),true),120);
   }
 
 });
