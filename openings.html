@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Openings - ChessSalina</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/chessboard-1.0.0.min.css">
 
 <style>
 
@@ -28,8 +33,6 @@ width:92%;
 max-width:1500px;
 margin:auto;
 }
-
-/* NAVBAR */
 
 .navbar{
 margin-top:20px;
@@ -80,8 +83,6 @@ transition:.3s;
 color:#D4A017;
 }
 
-/* HERO */
-
 .hero{
 padding:70px 0 40px;
 }
@@ -101,8 +102,6 @@ font-size:22px;
 color:#666;
 }
 
-/* GRID */
-
 .main-grid{
 display:grid;
 grid-template-columns:280px 1fr 340px;
@@ -110,18 +109,14 @@ gap:25px;
 margin-bottom:40px;
 }
 
-/* CARDS */
-
 .card{
-background:rgba(255,255,255,.85);
+background:rgba(255,255,255,.88);
 border-radius:28px;
 padding:25px;
 border:1px solid rgba(212,160,23,.12);
 backdrop-filter:blur(20px);
 box-shadow:0 5px 20px rgba(0,0,0,.03);
 }
-
-/* OPENING LIST */
 
 .opening-item{
 padding:16px;
@@ -150,8 +145,6 @@ font-size:14px;
 color:#777;
 }
 
-/* BOARD */
-
 .board-title{
 display:flex;
 justify-content:space-between;
@@ -168,7 +161,7 @@ position:relative;
 display:flex;
 justify-content:center;
 align-items:center;
-min-height:650px;
+padding:20px;
 }
 
 .board-glow{
@@ -186,12 +179,10 @@ z-index:0;
 #board{
 position:relative;
 z-index:1;
-width:100%;
-display:flex;
-justify-content:center;
+width:620px;
+max-width:100%;
+margin:auto;
 }
-
-/* INFO */
 
 .info-title{
 font-size:32px;
@@ -236,8 +227,6 @@ background:linear-gradient(
 box-shadow:0 10px 30px rgba(212,160,23,.25);
 }
 
-/* BOTTOM */
-
 .bottom{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -258,8 +247,6 @@ font-size:22px;
 margin-top:8px;
 color:#666;
 }
-
-/* MOBILE */
 
 @media(max-width:1100px){
 
@@ -282,7 +269,9 @@ display:none;
 }
 
 </style>
+
 </head>
+
 <body>
 
 <div class="container">
@@ -303,162 +292,339 @@ Chess<span>Salina</span>
 <a href="analysis.html">Analysis</a>
 </div>
 
-</nav>
+</nav><!DOCTYPE html>
+<html lang="en">
 
-<section class="hero">
+<head>
 
-<h1>
-📖 <span>Openings</span>
-</h1>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<p>
-Study, train and master your opening repertoire.
-</p>
+<title>Openings - ChessSalina</title>
 
-</section>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<div class="main-grid">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/chessboard-1.0.0.min.css">
 
-<!-- LEFT -->
+<style>
 
-<div class="card">
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
-<div class="opening-item active"
-onclick="selectOpening(this,'Italian Game','1.e4 e5 2.Nf3 Nc6 3.Bc4',['Rapid development','Control the center','Kingside castling','Pressure on f7'])">
-<div class="opening-title">Italian Game</div>
-<div class="opening-moves">1.e4 e5 2.Nf3 Nc6 3.Bc4</div>
+body{
+background:linear-gradient(180deg,#ffffff,#f8f8f8);
+color:#222;
+overflow-x:hidden;
+}
+
+.container{
+width:92%;
+max-width:1500px;
+margin:auto;
+}
+
+.navbar{
+margin-top:20px;
+background:rgba(255,255,255,.85);
+border:1px solid rgba(212,160,23,.15);
+border-radius:28px;
+padding:25px 45px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+backdrop-filter:blur(20px);
+box-shadow:0 5px 30px rgba(0,0,0,.04);
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.logo-icon{
+font-size:38px;
+color:#D4A017;
+}
+
+.logo-text{
+font-size:38px;
+font-weight:600;
+}
+
+.logo-text span{
+color:#D4A017;
+}
+
+.menu{
+display:flex;
+gap:55px;
+}
+
+.menu a{
+text-decoration:none;
+color:#222;
+font-weight:500;
+transition:.3s;
+}
+
+.menu a:hover{
+color:#D4A017;
+}
+
+.hero{
+padding:70px 0 40px;
+}
+
+.hero h1{
+font-size:72px;
+font-weight:700;
+}
+
+.hero h1 span{
+color:#D4A017;
+}
+
+.hero p{
+margin-top:15px;
+font-size:22px;
+color:#666;
+}
+
+.main-grid{
+display:grid;
+grid-template-columns:280px 1fr 340px;
+gap:25px;
+margin-bottom:40px;
+}
+
+.card{
+background:rgba(255,255,255,.88);
+border-radius:28px;
+padding:25px;
+border:1px solid rgba(212,160,23,.12);
+backdrop-filter:blur(20px);
+box-shadow:0 5px 20px rgba(0,0,0,.03);
+}
+
+.opening-item{
+padding:16px;
+border-radius:16px;
+cursor:pointer;
+transition:.25s;
+margin-bottom:10px;
+}
+
+.opening-item:hover{
+background:#fff8e8;
+}
+
+.opening-item.active{
+background:#fff4d1;
+border:1px solid rgba(212,160,23,.25);
+}
+
+.opening-title{
+font-weight:600;
+margin-bottom:5px;
+}
+
+.opening-moves{
+font-size:14px;
+color:#777;
+}
+
+.board-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.board-title h2{
+font-size:30px;
+}
+
+.board-wrapper{
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.board-glow{
+position:absolute;
+width:320px;
+height:320px;
+background:rgba(212,160,23,.12);
+filter:blur(90px);
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+z-index:0;
+}
+
+#board{
+position:relative;
+z-index:1;
+width:620px;
+max-width:100%;
+margin:auto;
+}
+
+.info-title{
+font-size:32px;
+margin-bottom:15px;
+}
+
+.info-sub{
+font-size:15px;
+color:#666;
+margin-bottom:20px;
+}
+
+.section{
+margin-top:20px;
+}
+
+.section h3{
+margin-bottom:10px;
+color:#D4A017;
+}
+
+.section ul{
+padding-left:18px;
+line-height:1.9;
+color:#555;
+}
+
+.train-btn{
+display:block;
+margin-top:25px;
+text-align:center;
+text-decoration:none;
+padding:18px;
+border-radius:18px;
+font-weight:600;
+color:white;
+background:linear-gradient(
+135deg,
+#FFD76A,
+#D4A017
+);
+box-shadow:0 10px 30px rgba(212,160,23,.25);
+}
+
+.bottom{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-bottom:60px;
+}
+
+.mini{
+text-align:center;
+}
+
+.mini h3{
+margin-top:12px;
+font-size:22px;
+}
+
+.mini p{
+margin-top:8px;
+color:#666;
+}
+
+@media(max-width:1100px){
+
+.main-grid{
+grid-template-columns:1fr;
+}
+
+.bottom{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:48px;
+}
+
+.menu{
+display:none;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<nav class="navbar">
+
+<div class="logo">
+<div class="logo-icon">♔</div>
+<div class="logo-text">
+Chess<span>Salina</span>
+</div>
 </div>
 
-<div class="opening-item"
-onclick="selectOpening(this,'Sicilian Defense','1.e4 c5',['Asymmetrical position','Counterattack on queenside','Dynamic play','Fight for initiative'])">
-<div class="opening-title">Sicilian Defense</div>
-<div class="opening-moves">1.e4 c5</div>
+<div class="menu">
+<a href="index.html">Home</a>
+<a href="openings.html">Openings</a>
+<a href="tactics.html">Tactics</a>
+<a href="analysis.html">Analysis</a>
 </div>
 
-<div class="opening-item"
-onclick="selectOpening(this,'French Defense','1.e4 e6',['Solid pawn structure','Counterattack center','Strategic battles','Queenside expansion'])">
-<div class="opening-title">French Defense</div>
-<div class="opening-moves">1.e4 e6</div>
-</div>
+</nav><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<div class="opening-item"
-onclick="selectOpening(this,'Caro-Kann','1.e4 c6',['Very solid defense','Safe king','Strong structure','Endgame friendly'])">
-<div class="opening-title">Caro-Kann</div>
-<div class="opening-moves">1.e4 c6</div>
-</div>
-
-<div class="opening-item"
-onclick="selectOpening(this,'London System','1.d4 Nf6 2.Bf4',['Simple setup','Easy development','Strong structure','Flexible plans'])">
-<div class="opening-title">London System</div>
-<div class="opening-moves">1.d4 Nf6 2.Bf4</div>
-</div>
-
-</div>
-
-<!-- CENTER -->
-
-<div class="card">
-
-<div class="board-title">
-<h2 id="openingName">Italian Game</h2>
-</div>
-
-<div class="board-wrapper">
-
-<div class="board-glow"></div>
-
-<div id="board">
-<chess-board position="start"></chess-board>
-</div>
-
-</div>
-
-</div>
-
-<!-- RIGHT -->
-
-<div class="card">
-
-<div class="info-title" id="infoTitle">
-Italian Game
-</div>
-
-<div class="info-sub" id="infoMoves">
-1.e4 e5 2.Nf3 Nc6 3.Bc4
-</div>
-
-<div class="section">
-<h3>Main Ideas</h3>
-
-<ul id="ideas">
-<li>Rapid development</li>
-<li>Control the center</li>
-<li>Kingside castling</li>
-<li>Pressure on f7</li>
-</ul>
-
-</div>
-
-<a href="#" class="train-btn">
-Forge This Opening →
-</a>
-
-</div>
-
-</div>
-
-<div class="bottom">
-
-<div class="card mini">
-<h3>📚 Learn</h3>
-<p>Understand opening ideas.</p>
-</div>
-
-<div class="card mini">
-<h3>🎯 Train</h3>
-<p>Practice critical positions.</p>
-</div>
-
-<div class="card mini">
-<h3>🔄 Review</h3>
-<p>Repeat lines efficiently.</p>
-</div>
-
-<div class="card mini">
-<h3>🏆 Master</h3>
-<p>Build your repertoire.</p>
-</div>
-
-</div>
-
-</div>
-
-<script type="module">
-import "https://cdn.jsdelivr.net/npm/chessboard-element@1.4.0/dist/chessboard-element.min.js";
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/chessboard-1.0.0.min.js"></script>
 
 <script>
 
-function selectOpening(element,name,moves,ideas){
-
-document.getElementById('openingName').textContent=name;
-document.getElementById('infoTitle').textContent=name;
-document.getElementById('infoMoves').textContent=moves;
-
-let html='';
-
-ideas.forEach(function(item){
-html += `<li>${item}</li>`;
+var board = Chessboard('board', {
+    draggable: true,
+    position: 'start',
+    pieceTheme:
+    'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
 });
 
-document.getElementById('ideas').innerHTML=html;
+function selectOpening(element,name,moves,ideas){
+
+document.getElementById('openingName').textContent = name;
+document.getElementById('infoTitle').textContent = name;
+document.getElementById('infoMoves').textContent = moves;
+
+let html = '';
+
+ideas.forEach(function(item){
+html += '<li>' + item + '</li>';
+});
+
+document.getElementById('ideas').innerHTML = html;
 
 document.querySelectorAll('.opening-item')
-.forEach(el=>el.classList.remove('active'));
+.forEach(function(el){
+el.classList.remove('active');
+});
 
 element.classList.add('active');
 
 }
+
+window.addEventListener('resize', function () {
+board.resize();
+});
 
 </script>
 
