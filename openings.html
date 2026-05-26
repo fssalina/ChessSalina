@@ -92,7 +92,7 @@ font-weight:700;
 color:#D4A017;
 }
 
-/* GRID ORIGINAL */
+/* GRID */
 .main-grid{
 display:grid;
 grid-template-columns:280px 1fr 340px;
@@ -154,7 +154,7 @@ box-shadow:0 0 25px rgba(255,0,0,.35);
 
 <div class="container">
 
-<!-- ===== NAVBAR ORIGINAL ===== -->
+<!-- ===== LAYOUT ORIGINAL ===== -->
 <nav class="navbar">
 <div class="logo">
 <div class="logo-icon">♔</div>
@@ -169,53 +169,19 @@ box-shadow:0 0 25px rgba(255,0,0,.35);
 </div>
 </nav>
 
-<!-- ===== HERO ORIGINAL ===== -->
 <section class="hero">
 <h1>📖 <span>Openings</span></h1>
 </section>
 
-<!-- ===== GRID ORIGINAL ===== -->
 <div class="main-grid">
 
-<!-- LEFT (OPENINGS ORIGINAL) -->
-<div class="card">
+<div class="card"></div>
 
-<div class="opening-item active"
-onclick="selectOpening('Italian Game','1.e4 e5 2.Nf3 Nc6 3.Bc4',['Rapid development','Control center','Castling','Pressure f7'],this)">
-<div class="opening-title">Italian Game</div>
-<div class="opening-moves">1.e4 e5 2.Nf3 Nc6 3.Bc4</div>
-</div>
-
-<div class="opening-item"
-onclick="selectOpening('Sicilian Defense','1.e4 c5',['Counterattack','Dynamic play','Initiative','Imbalance'],this)">
-<div class="opening-title">Sicilian Defense</div>
-<div class="opening-moves">1.e4 c5</div>
-</div>
-
-</div>
-
-<!-- CENTER (BOARD) -->
 <div class="card">
 <div id="board"></div>
 </div>
 
-<!-- RIGHT (INFO ORIGINAL) -->
-<div class="card">
-
-<div class="info-title" id="infoTitle">Italian Game</div>
-<div class="info-sub" id="infoMoves">1.e4 e5 2.Nf3 Nc6 3.Bc4</div>
-
-<div class="section">
-<h3>Main Ideas</h3>
-<ul id="ideas">
-<li>Rapid development</li>
-<li>Control center</li>
-<li>Castling</li>
-<li>Pressure f7</li>
-</ul>
-</div>
-
-</div>
+<div class="card"></div>
 
 </div>
 
@@ -227,6 +193,9 @@ onclick="selectOpening('Sicilian Defense','1.e4 c5',['Counterattack','Dynamic pl
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
 <script>
+
+/* ===== CHESS ENGINE ===== */
+var game = new Chess();
 
 /* ===== SONS ===== */
 var sounds = {
@@ -241,13 +210,10 @@ function play(s){
   sounds[s].play();
 }
 
-/* GAME */
-var game = new Chess();
-
-/* HIGHLIGHTS */
+/* ===== HIGHLIGHTS ===== */
 function removeHighlights(){
   document.querySelectorAll('.square-55d63')
-    .forEach(e => e.classList.remove('highlight-square'));
+    .forEach(el => el.classList.remove('highlight-square'));
 }
 
 function showMoves(square){
@@ -255,13 +221,13 @@ function showMoves(square){
 
   var moves = game.moves({square:square, verbose:true});
 
-  moves.forEach(m=>{
+  moves.forEach(function (m){
     var el = document.querySelector('[data-square="'+m.to+'"]');
     if(el) el.classList.add('highlight-square');
   });
 }
 
-/* BOARD */
+/* ===== BOARD ===== */
 var board = Chessboard('board', {
 
   position:'start',
@@ -289,14 +255,17 @@ var board = Chessboard('board', {
 
     removeHighlights();
 
+    /* ilegal */
     if(move===null){
       play("illegal");
       return "snapback";
     }
 
+    /* som */
     if(move.captured) play("capture");
     else play("move");
 
+    /* xeque */
     if(game.in_check()){
       document.getElementById("board").classList.add("check");
       setTimeout(()=>play("check"),100);
@@ -304,26 +273,11 @@ var board = Chessboard('board', {
       document.getElementById("board").classList.remove("check");
     }
 
+    /* animação */
     setTimeout(()=>board.position(game.fen(),true),120);
   }
 
 });
-
-/* OPENING SWITCH */
-function selectOpening(name,moves,ideas,el){
-
-document.getElementById('infoTitle').textContent=name;
-document.getElementById('infoMoves').textContent=moves;
-
-let html='';
-ideas.forEach(i=>html+=`<li>${i}</li>`);
-document.getElementById('ideas').innerHTML=html;
-
-document.querySelectorAll('.opening-item')
-.forEach(e=>e.classList.remove('active'));
-
-el.classList.add('active');
-}
 
 </script>
 
