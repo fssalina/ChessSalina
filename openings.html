@@ -13,56 +13,135 @@ href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.mi
 
 <style>
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{background:linear-gradient(180deg,#ffffff,#f8f8f8);color:#222;overflow-x:hidden;}
-.container{width:92%;max-width:1500px;margin:auto;}
-
-.navbar{margin-top:20px;background:rgba(255,255,255,.85);border:1px solid rgba(212,160,23,.15);border-radius:28px;padding:25px 45px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);box-shadow:0 5px 30px rgba(0,0,0,.04);}
-.logo{display:flex;align-items:center;gap:14px;}
-.logo-icon{font-size:38px;color:#D4A017;}
-.logo-text{font-size:38px;font-weight:600;}
-.logo-text span{color:#D4A017;}
-.menu{display:flex;gap:55px;}
-.menu a{text-decoration:none;color:#222;font-weight:500;}
-
-.hero{padding:70px 0 40px;}
-.hero h1{font-size:72px;font-weight:700;}
-.hero span{color:#D4A017;}
-
-.main-grid{display:grid;grid-template-columns:280px 1fr 340px;gap:25px;margin-bottom:40px;}
-.card{background:rgba(255,255,255,.85);border-radius:28px;padding:25px;border:1px solid rgba(212,160,23,.12);backdrop-filter:blur(20px);}
-
-#board{width:100%;max-width:620px;margin:auto;height:500px;}
-
-.board-glow{position:absolute;width:300px;height:300px;background:rgba(212,160,23,.12);filter:blur(90px);left:50%;top:50%;transform:translate(-50%,-50%);z-index:0;}
-
-/* ===== BOLINHAS ===== */
-.highlight-square {
-  position: relative;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
-.highlight-square::after {
-  content: "";
-  position: absolute;
-  width: 18%;
-  height: 18%;
-  border-radius: 50%;
-  background: rgba(212,160,23,.75);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  animation: fadeIn .12s ease-out;
+body{
+background:linear-gradient(180deg,#ffffff,#f8f8f8);
+color:#222;
+overflow-x:hidden;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
-  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.container{
+width:92%;
+max-width:1500px;
+margin:auto;
+}
+
+/* NAVBAR */
+.navbar{
+margin-top:20px;
+background:rgba(255,255,255,.85);
+border:1px solid rgba(212,160,23,.15);
+border-radius:28px;
+padding:25px 45px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+backdrop-filter:blur(20px);
+box-shadow:0 5px 30px rgba(0,0,0,.04);
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.logo-icon{
+font-size:38px;
+color:#D4A017;
+}
+
+.logo-text{
+font-size:38px;
+font-weight:600;
+}
+
+.logo-text span{
+color:#D4A017;
+}
+
+.menu{
+display:flex;
+gap:55px;
+}
+
+.menu a{
+text-decoration:none;
+color:#222;
+font-weight:500;
+}
+
+/* HERO */
+.hero{
+padding:70px 0 40px;
+}
+
+.hero h1{
+font-size:72px;
+font-weight:700;
+}
+
+.hero span{
+color:#D4A017;
+}
+
+/* GRID */
+.main-grid{
+display:grid;
+grid-template-columns:280px 1fr 340px;
+gap:25px;
+margin-bottom:40px;
+}
+
+.card{
+background:rgba(255,255,255,.85);
+border-radius:28px;
+padding:25px;
+border:1px solid rgba(212,160,23,.12);
+backdrop-filter:blur(20px);
+}
+
+/* BOARD */
+#board{
+width:100%;
+max-width:620px;
+margin:auto;
+height:500px;
+}
+
+/* BOLINHAS */
+.highlight-square{
+position:relative;
+}
+
+.highlight-square::after{
+content:"";
+position:absolute;
+width:18%;
+height:18%;
+border-radius:50%;
+background:rgba(212,160,23,.75);
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+pointer-events:none;
+animation:fadeIn .12s ease-out;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translate(-50%,-50%) scale(0.6);}
+to{opacity:1;transform:translate(-50%,-50%) scale(1);}
 }
 
 /* XEQUE */
-#board.check {
-  box-shadow: 0 0 25px rgba(255,0,0,.35);
+#board.check{
+box-shadow:0 0 25px rgba(255,0,0,.35);
 }
 
 </style>
@@ -77,7 +156,18 @@ body{background:linear-gradient(180deg,#ffffff,#f8f8f8);color:#222;overflow-x:hi
 <div class="logo-icon">♔</div>
 <div class="logo-text">Chess<span>Salina</span></div>
 </div>
+
+<div class="menu">
+<a href="index.html">Home</a>
+<a href="openings.html">Openings</a>
+<a href="tactics.html">Tactics</a>
+<a href="analysis.html">Analysis</a>
+</div>
 </nav>
+
+<section class="hero">
+<h1>📖 <span>Openings</span></h1>
+</section>
 
 <div class="main-grid">
 
@@ -112,10 +202,10 @@ function play(s){
   sounds[s].play();
 }
 
-/* ===== JOGO ===== */
+/* ===== GAME ===== */
 var game = new Chess();
 
-/* ===== HIGHLIGHT ===== */
+/* ===== HIGHLIGHTS ===== */
 function removeHighlights(){
   document.querySelectorAll('.square-55d63')
     .forEach(e => e.classList.remove('highlight-square'));
@@ -176,6 +266,7 @@ var board = Chessboard('board', {
 
     setTimeout(()=>board.position(game.fen(),true),120);
   }
+
 });
 
 </script>
