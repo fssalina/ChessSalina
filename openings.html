@@ -13,6 +13,8 @@ href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.mi
 
 <style>
 
+/* ===== SEU LAYOUT ORIGINAL (NÃO ALTERADO) ===== */
+
 *{
 margin:0;
 padding:0;
@@ -90,6 +92,7 @@ font-weight:700;
 color:#D4A017;
 }
 
+/* GRID ORIGINAL */
 .main-grid{
 display:grid;
 grid-template-columns:280px 1fr 340px;
@@ -112,6 +115,8 @@ max-width:620px;
 margin:auto;
 height:500px;
 }
+
+/* ===== MELHORIAS ===== */
 
 /* BOLINHAS */
 .highlight-square{
@@ -149,7 +154,9 @@ box-shadow:0 0 25px rgba(255,0,0,.35);
 
 <div class="container">
 
+<!-- ===== NAVBAR ORIGINAL ===== -->
 <nav class="navbar">
+
 <div class="logo">
 <div class="logo-icon">♔</div>
 <div class="logo-text">Chess<span>Salina</span></div>
@@ -161,26 +168,39 @@ box-shadow:0 0 25px rgba(255,0,0,.35);
 <a href="tactics.html">Tactics</a>
 <a href="analysis.html">Analysis</a>
 </div>
+
 </nav>
 
+<!-- ===== HERO ORIGINAL ===== -->
 <section class="hero">
 <h1>📖 <span>Openings</span></h1>
 </section>
 
+<!-- ===== GRID ORIGINAL ===== -->
 <div class="main-grid">
 
-<div class="card"></div>
+<div class="card">
+
+<!-- você pode manter suas openings aqui -->
+<p>Openings list stays untouched</p>
+
+</div>
 
 <div class="card">
 <div id="board"></div>
 </div>
 
-<div class="card"></div>
+<div class="card">
+
+<p>Info panel stays untouched</p>
 
 </div>
 
 </div>
 
+</div>
+
+<!-- ===== SCRIPTS ===== -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
@@ -200,10 +220,10 @@ function play(s){
   sounds[s].play();
 }
 
-/* ===== GAME ===== */
+/* GAME */
 var game = new Chess();
 
-/* ===== HIGHLIGHTS ===== */
+/* HIGHLIGHT */
 function removeHighlights(){
   document.querySelectorAll('.square-55d63')
     .forEach(e => e.classList.remove('highlight-square'));
@@ -220,7 +240,7 @@ function showMoves(square){
   });
 }
 
-/* ===== BOARD ===== */
+/* BOARD */
 var board = Chessboard('board', {
 
   position:'start',
