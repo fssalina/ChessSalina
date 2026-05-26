@@ -13,7 +13,7 @@ href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.mi
 
 <style>
 
-/* ===== SEU LAYOUT ORIGINAL (NÃO ALTERADO) ===== */
+/* ===== SEU LAYOUT ORIGINAL (INTACTO) ===== */
 
 *{
 margin:0;
@@ -156,7 +156,6 @@ box-shadow:0 0 25px rgba(255,0,0,.35);
 
 <!-- ===== NAVBAR ORIGINAL ===== -->
 <nav class="navbar">
-
 <div class="logo">
 <div class="logo-icon">♔</div>
 <div class="logo-text">Chess<span>Salina</span></div>
@@ -168,7 +167,6 @@ box-shadow:0 0 25px rgba(255,0,0,.35);
 <a href="tactics.html">Tactics</a>
 <a href="analysis.html">Analysis</a>
 </div>
-
 </nav>
 
 <!-- ===== HERO ORIGINAL ===== -->
@@ -179,20 +177,43 @@ box-shadow:0 0 25px rgba(255,0,0,.35);
 <!-- ===== GRID ORIGINAL ===== -->
 <div class="main-grid">
 
+<!-- LEFT (OPENINGS ORIGINAL) -->
 <div class="card">
 
-<!-- você pode manter suas openings aqui -->
-<p>Openings list stays untouched</p>
+<div class="opening-item active"
+onclick="selectOpening('Italian Game','1.e4 e5 2.Nf3 Nc6 3.Bc4',['Rapid development','Control center','Castling','Pressure f7'],this)">
+<div class="opening-title">Italian Game</div>
+<div class="opening-moves">1.e4 e5 2.Nf3 Nc6 3.Bc4</div>
+</div>
+
+<div class="opening-item"
+onclick="selectOpening('Sicilian Defense','1.e4 c5',['Counterattack','Dynamic play','Initiative','Imbalance'],this)">
+<div class="opening-title">Sicilian Defense</div>
+<div class="opening-moves">1.e4 c5</div>
+</div>
 
 </div>
 
+<!-- CENTER (BOARD) -->
 <div class="card">
 <div id="board"></div>
 </div>
 
+<!-- RIGHT (INFO ORIGINAL) -->
 <div class="card">
 
-<p>Info panel stays untouched</p>
+<div class="info-title" id="infoTitle">Italian Game</div>
+<div class="info-sub" id="infoMoves">1.e4 e5 2.Nf3 Nc6 3.Bc4</div>
+
+<div class="section">
+<h3>Main Ideas</h3>
+<ul id="ideas">
+<li>Rapid development</li>
+<li>Control center</li>
+<li>Castling</li>
+<li>Pressure f7</li>
+</ul>
+</div>
 
 </div>
 
@@ -223,7 +244,7 @@ function play(s){
 /* GAME */
 var game = new Chess();
 
-/* HIGHLIGHT */
+/* HIGHLIGHTS */
 function removeHighlights(){
   document.querySelectorAll('.square-55d63')
     .forEach(e => e.classList.remove('highlight-square'));
@@ -287,6 +308,22 @@ var board = Chessboard('board', {
   }
 
 });
+
+/* OPENING SWITCH */
+function selectOpening(name,moves,ideas,el){
+
+document.getElementById('infoTitle').textContent=name;
+document.getElementById('infoMoves').textContent=moves;
+
+let html='';
+ideas.forEach(i=>html+=`<li>${i}</li>`);
+document.getElementById('ideas').innerHTML=html;
+
+document.querySelectorAll('.opening-item')
+.forEach(e=>e.classList.remove('active'));
+
+el.classList.add('active');
+}
 
 </script>
 
