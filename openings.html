@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>ChessSalina - Openings</title>
 
@@ -203,11 +203,7 @@ border-radius:18px;
 text-decoration:none;
 font-weight:600;
 color:white;
-background:linear-gradient(
-135deg,
-#FFD76A,
-#D4A017
-);
+background:linear-gradient(135deg,#FFD76A,#D4A017);
 cursor:pointer;
 }
 
@@ -233,7 +229,7 @@ color:#666;
 font-size:14px;
 }
 
-/* HIGHLIGHTS */
+/* MOVE DOTS */
 
 .highlight-square{
 position:relative;
@@ -503,11 +499,7 @@ Play as Black
 id="resignBtn"
 style="
 display:none;
-background:linear-gradient(
-135deg,
-#ff7b7b,
-#d94b4b
-);
+background:linear-gradient(135deg,#ff7b7b,#d94b4b);
 "
 onclick="resignGame()">
 Resign
@@ -551,17 +543,47 @@ Resign
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/stockfish@16.0.0/src/stockfish-nnue-16-single.js"></script>
-
 <script>
 
 var game = new Chess();
 
-var engine = STOCKFISH();
-
 var playingEngine = false;
 
 var playerColor = 'white';
+
+var engine = null;
+
+/* LOAD ENGINE */
+
+function createEngine(){
+
+engine = new Worker(
+'https://cdn.jsdelivr.net/npm/stockfish.js@10.0.2/stockfish.min.js'
+);
+
+engine.onmessage = function(event){
+
+var line = event.data;
+
+if(line.startsWith("bestmove")){
+
+var move = line.split(" ")[1];
+
+if(move === "(none)") return;
+
+game.move({
+from:move.substring(0,2),
+to:move.substring(2,4),
+promotion:'q'
+});
+
+board.position(game.fen(),false);
+
+}
+
+};
+
+}
 
 /* SOUNDS */
 
@@ -656,7 +678,13 @@ playingEngine = true;
 document.getElementById('resignBtn')
 .style.display='block';
 
+if(!engine){
+createEngine();
+}
+
+if(document.documentElement.requestFullscreen){
 document.documentElement.requestFullscreen();
+}
 
 if(color === 'black'){
 
@@ -685,37 +713,15 @@ document.exitFullscreen();
 
 }
 
-engine.onmessage = function(event){
-
-var line = event;
-
-if(typeof event === "object"){
-line = event.data;
-}
-
-if(line.startsWith("bestmove")){
-
-var move = line.split(" ")[1];
-
-game.move({
-from:move.substring(0,2),
-to:move.substring(2,4),
-promotion:'q'
-});
-
-board.position(game.fen(),false);
-
-}
-
-};
-
 function engineMove(){
+
+if(!engine) return;
 
 engine.postMessage(
 "position fen " + game.fen()
 );
 
-engine.postMessage("go depth 12");
+engine.postMessage("go depth 10");
 
 }
 
