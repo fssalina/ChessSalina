@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>ChessSalina - Openings</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+
+<link rel="stylesheet"
+href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
 
 <style>
 
@@ -25,16 +28,18 @@ overflow-x:hidden;
 
 .container{
 width:92%;
-max-width:1500px;
+max-width:1400px;
 margin:auto;
 }
+
+/* NAVBAR */
 
 .navbar{
 margin-top:20px;
 background:rgba(255,255,255,.88);
 border:1px solid rgba(212,160,23,.15);
 border-radius:28px;
-padding:25px 45px;
+padding:22px 40px;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -49,12 +54,12 @@ align-items:center;
 }
 
 .logo-icon{
-font-size:38px;
+font-size:34px;
 color:#D4A017;
 }
 
 .logo-text{
-font-size:38px;
+font-size:34px;
 font-weight:600;
 }
 
@@ -64,25 +69,28 @@ color:#D4A017;
 
 .menu{
 display:flex;
-gap:50px;
+gap:40px;
 }
 
 .menu a{
 text-decoration:none;
 color:#222;
 font-weight:500;
+transition:.2s;
 }
 
 .menu a:hover{
 color:#D4A017;
 }
 
+/* HERO */
+
 .hero{
-padding:70px 0 35px;
+padding:55px 0 28px;
 }
 
 .hero h1{
-font-size:72px;
+font-size:54px;
 font-weight:700;
 }
 
@@ -91,26 +99,30 @@ color:#D4A017;
 }
 
 .hero p{
-margin-top:10px;
-font-size:22px;
+margin-top:8px;
+font-size:18px;
 color:#666;
 }
 
+/* GRID */
+
 .main-grid{
 display:grid;
-grid-template-columns:280px 1fr 340px;
-gap:25px;
-margin-bottom:30px;
+grid-template-columns:230px 1fr 270px;
+gap:18px;
+margin-bottom:25px;
 }
 
 .card{
 background:rgba(255,255,255,.88);
 border-radius:28px;
-padding:25px;
+padding:22px;
 border:1px solid rgba(212,160,23,.12);
 backdrop-filter:blur(20px);
 box-shadow:0 5px 20px rgba(0,0,0,.03);
 }
+
+/* OPENINGS */
 
 .opening-item{
 padding:14px;
@@ -139,17 +151,20 @@ font-size:13px;
 color:#777;
 }
 
+/* BOARD */
+
 .board-wrap{
 position:relative;
 display:flex;
 justify-content:center;
 align-items:center;
+min-height:520px;
 }
 
 .glow{
 position:absolute;
-width:320px;
-height:320px;
+width:280px;
+height:280px;
 background:rgba(212,160,23,.15);
 filter:blur(90px);
 border-radius:50%;
@@ -158,12 +173,14 @@ border-radius:50%;
 #board{
 position:relative;
 z-index:2;
-width:620px;
+width:470px;
 max-width:100%;
 }
 
+/* INFO */
+
 .info-title{
-font-size:32px;
+font-size:28px;
 margin-bottom:10px;
 }
 
@@ -181,18 +198,24 @@ margin-bottom:10px;
 display:block;
 margin-top:22px;
 text-align:center;
-padding:16px;
+padding:15px;
 border-radius:18px;
 text-decoration:none;
 font-weight:600;
 color:white;
-background:linear-gradient(135deg,#FFD76A,#D4A017);
+background:linear-gradient(
+135deg,
+#FFD76A,
+#D4A017
+);
 }
+
+/* BOTTOM */
 
 .bottom{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:20px;
+gap:18px;
 margin-bottom:60px;
 }
 
@@ -206,7 +229,10 @@ margin-bottom:8px;
 
 .mini p{
 color:#666;
+font-size:14px;
 }
+
+/* HIGHLIGHTS */
 
 .highlight-square{
 position:relative;
@@ -227,15 +253,20 @@ animation:fadeIn .12s ease-out;
 }
 
 @keyframes fadeIn{
+
 from{
 opacity:0;
 transform:translate(-50%,-50%) scale(.6);
 }
+
 to{
 opacity:1;
 transform:translate(-50%,-50%) scale(1);
 }
+
 }
+
+/* MOBILE */
 
 @media(max-width:1100px){
 
@@ -252,13 +283,14 @@ display:none;
 }
 
 .hero h1{
-font-size:50px;
+font-size:42px;
 }
 
 }
 
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -267,7 +299,9 @@ font-size:50px;
 
 <div class="logo">
 <div class="logo-icon">♔</div>
-<div class="logo-text">Chess<span>Salina</span></div>
+<div class="logo-text">
+Chess<span>Salina</span>
+</div>
 </div>
 
 <div class="menu">
@@ -280,47 +314,138 @@ font-size:50px;
 </nav>
 
 <section class="hero">
-<h1>📖 <span>Openings</span></h1>
-<p>Forge your opening strength.</p>
+
+<h1>
+📖 <span>Openings</span>
+</h1>
+
+<p>
+Forge your opening strength.
+</p>
+
 </section>
 
 <div class="main-grid">
 
+<!-- LEFT -->
+
 <div class="card">
 
-<h2 style="margin-bottom:18px;">Opening Library</h2>
+<h2 style="margin-bottom:18px;">
+Opening Library
+</h2>
 
-<div class="opening-item active">
-<div class="opening-title">Italian Game</div>
-<div class="opening-moves">1.e4 e5 2.Nf3 Nc6 3.Bc4</div>
+<div class="opening-item active"
+onclick="setOpening(
+'Italian Game',
+'1.e4 e5 2.Nf3 Nc6 3.Bc4',
+'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 2 3',
+this
+)">
+
+<div class="opening-title">
+Italian Game
 </div>
 
-<div class="opening-item">
-<div class="opening-title">Sicilian Defense</div>
-<div class="opening-moves">1.e4 c5</div>
-</div>
-
-<div class="opening-item">
-<div class="opening-title">French Defense</div>
-<div class="opening-moves">1.e4 e6</div>
-</div>
-
-<div class="opening-item">
-<div class="opening-title">Caro-Kann</div>
-<div class="opening-moves">1.e4 c6</div>
-</div>
-
-<div class="opening-item">
-<div class="opening-title">London System</div>
-<div class="opening-moves">1.d4 Nf6 2.Bf4</div>
-</div>
-
-<div class="opening-item">
-<div class="opening-title">Queen's Gambit</div>
-<div class="opening-moves">1.d4 d5 2.c4</div>
+<div class="opening-moves">
+1.e4 e5 2.Nf3 Nc6 3.Bc4
 </div>
 
 </div>
+
+<div class="opening-item"
+onclick="setOpening(
+'Sicilian Defense',
+'1.e4 c5',
+'rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2',
+this
+)">
+
+<div class="opening-title">
+Sicilian Defense
+</div>
+
+<div class="opening-moves">
+1.e4 c5
+</div>
+
+</div>
+
+<div class="opening-item"
+onclick="setOpening(
+'French Defense',
+'1.e4 e6',
+'rnbqkbnr/pppp1ppp/4p3/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2',
+this
+)">
+
+<div class="opening-title">
+French Defense
+</div>
+
+<div class="opening-moves">
+1.e4 e6
+</div>
+
+</div>
+
+<div class="opening-item"
+onclick="setOpening(
+'Caro-Kann',
+'1.e4 c6',
+'rnbqkbnr/pp1ppppp/2p5/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2',
+this
+)">
+
+<div class="opening-title">
+Caro-Kann
+</div>
+
+<div class="opening-moves">
+1.e4 c6
+</div>
+
+</div>
+
+<div class="opening-item"
+onclick="setOpening(
+'London System',
+'1.d4 Nf6 2.Bf4',
+'rnbqkb1r/pppppppp/5n2/8/3P1B2/8/PPP1PPPP/RN1QKBNR b KQkq - 2 2',
+this
+)">
+
+<div class="opening-title">
+London System
+</div>
+
+<div class="opening-moves">
+1.d4 Nf6 2.Bf4
+</div>
+
+</div>
+
+<div class="opening-item"
+onclick="setOpening(
+'Queens Gambit',
+'1.d4 d5 2.c4',
+'rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b KQkq - 0 2',
+this
+)">
+
+<div class="opening-title">
+Queen's Gambit
+</div>
+
+<div class="opening-moves">
+1.d4 d5 2.c4
+</div>
+
+</div>
+
+</div>
+
+<!-- CENTER -->
 
 <div class="card">
 
@@ -333,6 +458,8 @@ font-size:50px;
 </div>
 
 </div>
+
+<!-- RIGHT -->
 
 <div class="card">
 
@@ -348,11 +475,17 @@ Italian Game
 Main Ideas
 </h3>
 
-<ul style="line-height:2;padding-left:18px;color:#555;">
+<ul style="
+line-height:2;
+padding-left:18px;
+color:#555;
+">
+
 <li>Rapid development</li>
 <li>Control the center</li>
 <li>Kingside castling</li>
 <li>Pressure on f7</li>
+
 </ul>
 
 <a class="train-btn" href="#">
@@ -362,6 +495,8 @@ Forge This Opening →
 </div>
 
 </div>
+
+<!-- BOTTOM -->
 
 <div class="bottom">
 
@@ -390,35 +525,58 @@ Forge This Opening →
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
 <script>
 
 var game = new Chess();
 
+/* SOUNDS */
+
 var sounds = {
-move:new Audio("https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/move-self.mp3"),
-capture:new Audio("https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/capture.mp3"),
-illegal:new Audio("https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/error.mp3"),
-check:new Audio("https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/move-check.mp3")
+
+move:new Audio(
+"https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/move-self.mp3"
+),
+
+capture:new Audio(
+"https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/capture.mp3"
+),
+
+illegal:new Audio(
+"https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/error.mp3"
+),
+
+check:new Audio(
+"https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/move-check.mp3"
+)
+
 };
 
 function play(s){
+
 sounds[s].currentTime=0;
 sounds[s].play();
+
 }
 
+/* HIGHLIGHTS */
+
 function removeHighlights(){
+
 document.querySelectorAll('.square-55d63')
 .forEach(el=>el.classList.remove('highlight-square'));
+
 }
 
 function showMoves(square){
 
 removeHighlights();
 
-var moves=game.moves({
+var moves = game.moves({
 square:square,
 verbose:true
 });
@@ -436,6 +594,27 @@ el.classList.add('highlight-square');
 });
 
 }
+
+/* OPENINGS */
+
+function setOpening(title,moves,fen,element){
+
+document.querySelector('.info-title')
+.textContent = title;
+
+document.querySelector('.info-moves')
+.textContent = moves;
+
+board.position(fen);
+
+document.querySelectorAll('.opening-item')
+.forEach(el=>el.classList.remove('active'));
+
+element.classList.add('active');
+
+}
+
+/* BOARD */
 
 var board = Chessboard('board',{
 
@@ -463,16 +642,20 @@ showMoves(source);
 onDrop:function(source,target){
 
 var move = game.move({
+
 from:source,
 to:target,
 promotion:'q'
+
 });
 
 removeHighlights();
 
 if(move===null){
+
 play("illegal");
 return "snapback";
+
 }
 
 if(move.captured){
@@ -486,7 +669,9 @@ play("check");
 }
 
 setTimeout(function(){
+
 board.position(game.fen(),true);
+
 },120);
 
 }
@@ -494,7 +679,9 @@ board.position(game.fen(),true);
 });
 
 window.addEventListener('resize',function(){
+
 board.resize();
+
 });
 
 </script>
