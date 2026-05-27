@@ -196,7 +196,7 @@ margin-bottom:10px;
 
 .train-btn{
 display:block;
-margin-top:22px;
+margin-top:16px;
 text-align:center;
 padding:15px;
 border-radius:18px;
@@ -208,6 +208,7 @@ background:linear-gradient(
 #FFD76A,
 #D4A017
 );
+cursor:pointer;
 }
 
 /* BOTTOM */
@@ -488,8 +489,28 @@ color:#555;
 
 </ul>
 
-<a class="train-btn" href="#">
-Forge This Opening →
+<a class="train-btn"
+onclick="startGame('white')">
+Play as White
+</a>
+
+<a class="train-btn"
+onclick="startGame('black')">
+Play as Black
+</a>
+
+<a class="train-btn"
+id="resignBtn"
+style="
+display:none;
+background:linear-gradient(
+135deg,
+#ff7b7b,
+#d94b4b
+);
+"
+onclick="resignGame()">
+Resign
 </a>
 
 </div>
@@ -530,9 +551,17 @@ Forge This Opening →
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/stockfish@16.0.0/src/stockfish-nnue-16-single.js"></script>
+
 <script>
 
 var game = new Chess();
+
+var engine = STOCKFISH();
+
+var playingEngine = false;
+
+var playerColor = 'white';
 
 /* SOUNDS */
 
@@ -599,18 +628,94 @@ el.classList.add('highlight-square');
 
 function setOpening(title,moves,fen,element){
 
+game.load(fen);
+
+board.position(fen,false);
+
 document.querySelector('.info-title')
 .textContent = title;
 
 document.querySelector('.info-moves')
 .textContent = moves;
 
-board.position(fen);
-
 document.querySelectorAll('.opening-item')
 .forEach(el=>el.classList.remove('active'));
 
 element.classList.add('active');
+
+}
+
+/* ENGINE */
+
+function startGame(color){
+
+playerColor = color;
+
+playingEngine = true;
+
+document.getElementById('resignBtn')
+.style.display='block';
+
+document.documentElement.requestFullscreen();
+
+if(color === 'black'){
+
+setTimeout(function(){
+
+engineMove();
+
+},400);
+
+}
+
+}
+
+function resignGame(){
+
+playingEngine = false;
+
+document.getElementById('resignBtn')
+.style.display='none';
+
+alert("You resigned.");
+
+if(document.fullscreenElement){
+document.exitFullscreen();
+}
+
+}
+
+engine.onmessage = function(event){
+
+var line = event;
+
+if(typeof event === "object"){
+line = event.data;
+}
+
+if(line.startsWith("bestmove")){
+
+var move = line.split(" ")[1];
+
+game.move({
+from:move.substring(0,2),
+to:move.substring(2,4),
+promotion:'q'
+});
+
+board.position(game.fen(),false);
+
+}
+
+};
+
+function engineMove(){
+
+engine.postMessage(
+"position fen " + game.fen()
+);
+
+engine.postMessage("go depth 12");
 
 }
 
@@ -631,6 +736,16 @@ if(game.game_over()) return false;
 if(
 (game.turn()==='w' && piece[0]==='b') ||
 (game.turn()==='b' && piece[0]==='w')
+){
+return false;
+}
+
+if(
+playingEngine &&
+(
+(playerColor === 'white' && piece[0]==='b') ||
+(playerColor === 'black' && piece[0]==='w')
+)
 ){
 return false;
 }
@@ -668,11 +783,26 @@ if(game.in_check()){
 play("check");
 }
 
+board.position(game.fen(),false);
+
+if(playingEngine){
+
+var turn = game.turn();
+
+if(
+(playerColor === 'white' && turn === 'b') ||
+(playerColor === 'black' && turn === 'w')
+){
+
 setTimeout(function(){
 
-board.position(game.fen(),true);
+engineMove();
 
-},120);
+},300);
+
+}
+
+}
 
 }
 
