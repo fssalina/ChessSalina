@@ -1,3 +1,4 @@
+```html id="t6x9fk"
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -263,6 +264,66 @@ transform:translate(-50%,-50%) scale(1);
 
 }
 
+/* GAME MODE */
+
+.game-mode{
+position:fixed;
+inset:0;
+z-index:9999;
+background:rgba(255,255,255,.55);
+backdrop-filter:blur(18px);
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.game-content{
+width:95%;
+height:92%;
+background:white;
+border-radius:30px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:40px;
+padding:40px;
+box-shadow:0 20px 80px rgba(0,0,0,.2);
+position:relative;
+}
+
+.game-board{
+width:700px;
+max-width:90vw;
+}
+
+.close-game{
+position:absolute;
+top:20px;
+right:20px;
+width:48px;
+height:48px;
+border-radius:50%;
+background:rgba(0,0,0,.08);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+cursor:pointer;
+backdrop-filter:blur(10px);
+}
+
+.fullscreen-btn{
+position:absolute;
+bottom:20px;
+right:20px;
+padding:14px 22px;
+border-radius:16px;
+background:#D4A017;
+color:white;
+font-weight:600;
+cursor:pointer;
+}
+
 /* MOBILE */
 
 @media(max-width:1100px){
@@ -422,24 +483,6 @@ London System
 
 </div>
 
-<div class="opening-item"
-onclick="setOpening(
-'Queens Gambit',
-'1.d4 d5 2.c4',
-'rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR b KQkq - 0 2',
-this
-)">
-
-<div class="opening-title">
-Queen's Gambit
-</div>
-
-<div class="opening-moves">
-1.d4 d5 2.c4
-</div>
-
-</div>
-
 </div>
 
 <!-- CENTER -->
@@ -472,17 +515,11 @@ Italian Game
 Main Ideas
 </h3>
 
-<ul style="
-line-height:2;
-padding-left:18px;
-color:#555;
-">
-
+<ul style="line-height:2;padding-left:18px;color:#555;">
 <li>Rapid development</li>
 <li>Control the center</li>
 <li>Kingside castling</li>
 <li>Pressure on f7</li>
-
 </ul>
 
 <a class="train-btn"
@@ -508,8 +545,6 @@ Resign
 </div>
 
 </div>
-
-<!-- BOTTOM -->
 
 <div class="bottom">
 
@@ -537,6 +572,29 @@ Resign
 
 </div>
 
+<!-- GAME MODE -->
+
+<div class="game-mode" id="gameMode">
+
+<div class="game-content">
+
+<div class="close-game"
+onclick="closeGameMode()">
+✕
+</div>
+
+<div id="gameBoard"
+class="game-board"></div>
+
+<div class="fullscreen-btn"
+onclick="enterFullscreen()">
+Turn on Fullscreen
+</div>
+
+</div>
+
+</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
@@ -547,13 +605,15 @@ Resign
 
 var game = new Chess();
 
-var playingEngine = false;
+var board = null;
+var gameBoard = null;
 
+var playingEngine = false;
 var playerColor = 'white';
 
 var engine = null;
 
-/* LOAD ENGINE */
+/* ENGINE */
 
 function createEngine(){
 
@@ -576,6 +636,10 @@ from:move.substring(0,2),
 to:move.substring(2,4),
 promotion:'q'
 });
+
+if(gameBoard){
+gameBoard.position(game.fen(),false);
+}
 
 board.position(game.fen(),false);
 
@@ -608,10 +672,8 @@ check:new Audio(
 };
 
 function play(s){
-
 sounds[s].currentTime=0;
 sounds[s].play();
-
 }
 
 /* HIGHLIGHTS */
@@ -667,13 +729,81 @@ element.classList.add('active');
 
 }
 
-/* ENGINE */
+/* GAME MODE */
+
+function openGameMode(){
+
+document.getElementById('gameMode')
+.style.display='flex';
+
+setTimeout(function(){
+
+if(gameBoard){
+gameBoard.destroy();
+}
+
+gameBoard = Chessboard('gameBoard',{
+
+position:game.fen(),
+draggable:true,
+
+pieceTheme:
+'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
+
+onDrop:function(source,target){
+
+var move = game.move({
+
+from:source,
+to:target,
+promotion:'q'
+
+});
+
+if(move===null){
+return 'snapback';
+}
+
+gameBoard.position(game.fen(),false);
+board.position(game.fen(),false);
+
+setTimeout(function(){
+engineMove();
+},300);
+
+}
+
+});
+
+},50);
+
+}
+
+function closeGameMode(){
+
+document.getElementById('gameMode')
+.style.display='none';
+
+playingEngine=false;
+
+document.getElementById('resignBtn')
+.style.display='none';
+
+}
+
+function enterFullscreen(){
+
+if(document.documentElement.requestFullscreen){
+document.documentElement.requestFullscreen();
+}
+
+}
 
 function startGame(color){
 
-playerColor = color;
+playerColor=color;
 
-playingEngine = true;
+playingEngine=true;
 
 document.getElementById('resignBtn')
 .style.display='block';
@@ -682,17 +812,13 @@ if(!engine){
 createEngine();
 }
 
-if(document.documentElement.requestFullscreen){
-document.documentElement.requestFullscreen();
-}
+openGameMode();
 
-if(color === 'black'){
+if(color==='black'){
 
 setTimeout(function(){
-
 engineMove();
-
-},400);
+},500);
 
 }
 
@@ -700,18 +826,16 @@ engineMove();
 
 function resignGame(){
 
-playingEngine = false;
+playingEngine=false;
 
 document.getElementById('resignBtn')
 .style.display='none';
 
-alert("You resigned.");
-
-if(document.fullscreenElement){
-document.exitFullscreen();
-}
+closeGameMode();
 
 }
+
+/* ENGINE MOVE */
 
 function engineMove(){
 
@@ -725,9 +849,9 @@ engine.postMessage("go depth 10");
 
 }
 
-/* BOARD */
+/* MAIN BOARD */
 
-var board = Chessboard('board',{
+board = Chessboard('board',{
 
 position:'start',
 draggable:true,
@@ -742,16 +866,6 @@ if(game.game_over()) return false;
 if(
 (game.turn()==='w' && piece[0]==='b') ||
 (game.turn()==='b' && piece[0]==='w')
-){
-return false;
-}
-
-if(
-playingEngine &&
-(
-(playerColor === 'white' && piece[0]==='b') ||
-(playerColor === 'black' && piece[0]==='w')
-)
 ){
 return false;
 }
@@ -791,25 +905,6 @@ play("check");
 
 board.position(game.fen(),false);
 
-if(playingEngine){
-
-var turn = game.turn();
-
-if(
-(playerColor === 'white' && turn === 'b') ||
-(playerColor === 'black' && turn === 'w')
-){
-
-setTimeout(function(){
-
-engineMove();
-
-},300);
-
-}
-
-}
-
 }
 
 });
@@ -818,9 +913,14 @@ window.addEventListener('resize',function(){
 
 board.resize();
 
+if(gameBoard){
+gameBoard.resize();
+}
+
 });
 
 </script>
 
 </body>
 </html>
+```
